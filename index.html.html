@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>Ficha de Anamnese - Anderson S. Bruno</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 10px;
+            color: #333;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 1.8em;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .profissional-info {
+            background: rgba(255,255,255,0.2);
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-size: 0.9em;
+        }
+
+        .info-box {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 15px;
+            margin: 20px;
+            border-radius: 8px;
+            font-size: 0.9em;
+            color: #155724;
+        }
+
+        .form-container {
+            padding: 20px 15px;
+        }
+
+        .section {
+            margin-bottom: 25px;
+            padding: 20px 15px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            border-left: 4px solid #667eea;
+        }
+
+        .section-title {
+            color: #667eea;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+        }
+
+        .section-number {
+            background: #667eea;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.85em;
+            flex-shrink: 0;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            color: #444;
+            font-weight: 500;
+            font-size: 0.95em;
+            line-height: 1.4;
+        }
+
+        label .required {
+            color: #e74c3c;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="number"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: inherit;
+            -webkit-appearance: none;
+            appearance: none;
+            background-color: white;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23667eea' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            padding-right: 35px;
+        }
+
+        textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        @media (min-width: 600px) {
+            .form-row {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 15px;
+            }
+        }
+
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        @media (min-width: 480px) {
+            .radio-group {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+        }
+
+        .radio-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 12px;
+            background: white;
+            border-radius: 8px;
+            border: 2px solid #e0e0e0;
+            cursor: pointer;
+        }
+
+        .radio-item input[type="radio"] {
+            width: 20px;
+            height: 20px;
+            margin: 0;
+            flex-shrink: 0;
+            accent-color: #667eea;
+        }
+
+        .sub-section {
+            margin-top: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .sub-section-title {
+            color: #764ba2;
+            font-weight: 600;
+            margin-bottom: 12px;
+            font-size: 1em;
+        }
+
+        .btn-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        @media (min-width: 480px) {
+            .btn-container {
+                flex-direction: row;
+                justify-content: center;
+            }
+        }
+
+        .btn {
+            padding: 15px 25px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            width: 100%;
+            touch-action: manipulation;
+            cursor: pointer;
+            -webkit-appearance: none;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        @media (min-width: 480px) {
+            .btn {
+                width: auto;
+                min-width: 200px;
+            }
+        }
+
+        .btn-whatsapp {
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+        }
+
+        .btn-whatsapp:active {
+            transform: translateY(2px);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        .success-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .success-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            max-width: 90%;
+            margin: 20px;
+        }
+
+        .success-content h2 {
+            color: #25D366;
+            margin-bottom: 15px;
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>FICHA DE ANAMNESE</h1>
+            <div class="profissional-info">
+                <strong>Anderson S. Bruno</strong><br>
+                Psicanalista
+            </div>
+        </div>
+
+        <div class="info-box">
+            <strong>📱 Como funciona:</strong><br>
+            1. Preencha todos os campos abaixo<br>
+            2. Toque no botão verde "Enviar pelo WhatsApp"<br>
+            3. Será direcionado para o WhatsApp com a ficha pronta<br>
+            4. Toque em "Enviar" no WhatsApp
+        </div>
+
+        <form id="anamneseForm" class="form-container" onsubmit="return false;">
+
+            <!-- SEÇÃO 1: IDENTIFICAÇÃO -->
+            <div class="section">
+                <div class="section-title">
+                    <span class="section-number">1</span>
+                    IDENTIFICAÇÃO
+                </div>
+
+                <div class="form-group">
+                    <label>Nome completo: <span class="required">*</span></label>
+                    <input type="text" id="nome_completo" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Data de nascimento:</label>
+                        <input type="date" id="data_nascimento">
+                    </div>
+                    <div class="form-group">
+                        <label>Idade:</label>
+                        <input type="number" id="idade" min="0" max="120">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Sexo:</label>
+                        <select id="sexo">
+                            <option value="">Selecione</option>
+                            <option value="Feminino">Feminino</option>
+                            <option value="Masculino">Masculino</option>
+                            <option value="Outro">Outro</option>
+                            <option value="Prefiro não informar">Prefiro não informar</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Gênero:</label>
+                        <input type="text" id="genero" placeholder="Como se identifica">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Estado civil:</label>
+                        <select id="estado_civil">
+                            <option value="">Selecione</option>
+                            <option value="Solteiro(a)">Solteiro(a)</option>
+                            <option value="Casado(a)">Casado(a)</option>
+                            <option value="Divorciado(a)">Divorciado(a)</option>
+                            <option value="Viúvo(a)">Viúvo(a)</option>
+                            <option value="União estável">União estável</option>
+                            <option value="Separado(a)">Separado(a)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Profissão / Ocupação:</label>
+                        <input type="text" id="profissao">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Escolaridade:</label>
+                    <select id="escolaridade">
+                        <option value="">Selecione</option>
+                        <option value="Ensino Fundamental">Ensino Fundamental</option>
+                        <option value="Ensino Médio">Ensino Médio</option>
+                        <option value="Ensino Superior">Ensino Superior</option>
+                        <option value="Pós-graduação">Pós-graduação</option>
+                        <option value="Mestrado">Mestrado</option>
+                        <option value="Doutorado">Doutorado</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Endereço:</label>
+                    <input type="text" id="endereco">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Telefone:</label>
+                        <input type="tel" id="telefone" placeholder="(00) 00000-0000">
+                    </div>
+                    <div class="form-group">
+                        <label>E-mail:</label>
+                        <input type="email" id="email_paciente">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Encaminhado por:</label>
+                    <input type="text" id="encaminhado_por" placeholder="Médico, amigo, família, etc.">
+                </div>
+            </div>
+
+            <!-- SEÇÃO 2: DEMANDA E QUEIXA PRINCIPAL -->
+            <div class="section">
+                <div class="section-title">
+                    <span class="section-number">2</span>
+                    DEMANDA E QUEIXA PRINCIPAL
+                </div>
+
+                <div class="form-group">
+                    <label>O que o(a) trouxe ao atendimento neste momento?</label>
+                    <textarea id="motivo_atendimento" placeholder="Descreva o motivo atual da consulta..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Há quanto tempo percebeu essa necessidade de buscar ajuda?</label>
+                    <input type="text" id="tempo_necessidade" placeholder="Ex: 3 meses, 1 ano...">
+                </div>
+
+                <div class="form-group">
+                    <label>Já fez algum tipo de acompanhamento psicológico ou psiquiátrico antes?</label>
+                    <div class="radio-group">
+                        <label class="radio-item">
+                            <input type="radio" name="acompanhamento_anterior" value="Não">
+                            <span>Não</span>
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="acompanhamento_anterior" value="Sim, psicológico">
+                            <span>Sim, psicológico</span>
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="acompanhamento_anterior" value="Sim, psiquiátrico">
+                            <span>Sim, psiquiátrico</span>
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="acompanhamento_anterior" value="Sim, ambos">
+                            <span>Sim, ambos</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Se sim, por quanto tempo e como foi a experiência?</label>
+                    <textarea id="detalhes_acompanhamento" placeholder="Descreva a duração e sua experiência..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Expectativas em relação à análise:</label>
+                    <textarea id="expectativas" placeholder="O que espera do tratamento?"></textarea>
+                </div>
+            </div>
+
+            <!-- SEÇÃO 3: HISTÓRICO DA QUEIXA -->
+            <div class="section">
+                <div class="section-title">
+                    <span class="section-number">3</span>
+                    HISTÓRICO DA QUEIXA
+                </div>
+
+                <div class="form-group">
+                    <label>Como o problema começou? Houve algum evento desencadeador?</label>
+                    <textarea id="inicio_problema" placeholder="Descreva o início dos sintomas..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Evolução: piora, melhora, variações</label>
+                    <textarea id="evolucao" placeholder="Como os sintomas evoluíram ao longo do tempo?"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Impacto na vida cotidiana (trabalho, relacionamentos, lazer, alimentação, sono)</label>
+                    <textarea id="impacto_vida" placeholder="Descreva como isso afeta seu dia a dia..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Sintomas associados (ansiedade, tristeza, medos, pensamentos recorrentes, sintomas físicos)</label>
+                    <textarea id="sintomas_associados" placeholder="Liste os sintomas que apresenta..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Ideias de morte ou autoagressão? (avaliar risco)</label>
+                    <div class="radio-group">
+                        <label class="radio-item">
+                            <input type="radio" name="ideias_morte" value="Não">
+                            <span>Não</span>
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="ideias_morte" value="Sim, passado">
+                            <span>Sim, no passado</span>
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="ideias_morte" value="Sim, atual">
+                            <span>Sim, atualmente</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Se sim, forneça detalhes:</label>
+                    <textarea id="detalhes_risco" placeholder="Descreva frequência, intensidade, planos..."></textarea>
+                </div>
+            </div>
+
+            <!-- SEÇÃO 4: HISTÓRICO PESSOAL -->
+            <div class="section">
+                <div class="section-title">
+                    <span class="section-number">4</span>
+                    HISTÓRICO PESSOAL
+                </div>
+
+                <div class="sub-section">
+                    <div class="sub-section-title">a) Infância e adolescência</div>
+
+                    <div class="form-group">
+                        <label>Desenvolvimento (marcos importantes: andar, falar)</label>
+                        <textarea id="desenvolvimento" placeholder="Idade que começou a andar, falar, etc."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Como descreve sua relação com os pais / cuidadores?</label>
+                        <textarea id="relacao_pais" placeholder="Descreva a dinâmica familiar..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Eventos significativos: nascimento de irmãos, separações, mudanças, doenças, perdas</label>
+                        <textarea id="eventos_infancia" placeholder="Liste eventos importantes da infância..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Vida escolar: adaptação, desempenho, relacionamento com colegas</label>
+                        <textarea id="vida_escolar" placeholder="Como foi sua experiência na escola?"></textarea>
+                    </div>
+                </div>
+
+                <div class="sub-section">
+                    <div class="sub-section-title">b) Vida adulta</div>
+
+                    <div class="form-group">
+                        <label>Relacionamentos afetivos (duração)</label>
+                        <textarea id="relacionamentos" placeholder="Histórico de relacionamentos..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Conjugalidade / filhos</label>
+                        <textarea id="conjugalidade" placeholder="Estado civil atual, filhos, etc."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Vida profissional: satisfação, conflitos, realizações</label>
+                        <textarea id="vida_profissional" placeholder="Como descreve sua carreira?"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Hábitos e estilo de vida (sono, alimentação, exercícios, lazer)</label>
+                        <textarea id="habitos" placeholder="Descreva seus hábitos diários..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Uso de substâncias (álcool, tabaco, outras drogas)</label>
+                        <textarea id="substancias" placeholder="Frequência e tipos de uso..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Religião / espiritualidade</label>
+                        <textarea id="religiao" placeholder="Crenças e práticas espirituais..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="btn-container">
+                <!-- Botão que abre WhatsApp diretamente -->
+                <a href="#" class="btn btn-whatsapp" id="btnWhatsapp" onclick="enviarWhatsApp(); return false;">
+                    💬 Enviar pelo WhatsApp
+                </a>
+
+                <button type="button" class="btn btn-secondary" onclick="limparFormulario()">
+                    🔄 Limpar
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Modal de sucesso -->
+    <div class="success-modal" id="successModal">
+        <div class="success-content">
+            <h2>✅ Quase lá!</h2>
+            <p>O WhatsApp será aberto com sua ficha já preenchida.<br><br>
+            É só tocar em <strong>"Enviar"</strong>!</p>
+            <button class="btn btn-whatsapp" onclick="fecharModal()" style="background: #25D366;">Entendi</button>
+        </div>
+    </div>
+
+    <script>
+        // NÚMERO DO WHATSAPP DE ANDERSON - CONFIGURADO
+        const WHATSAPP_NUMERO = '5527997213951';
+
+        function enviarWhatsApp() {
+            const nome = document.getElementById('nome_completo').value.trim();
+            if (!nome) {
+                alert('Por favor, preencha o nome completo');
+                document.getElementById('nome_completo').focus();
+                return false;
+            }
+
+            // Coletar todos os dados
+            const dados = {
+                nome_completo: nome,
+                data_nascimento: document.getElementById('data_nascimento').value,
+                idade: document.getElementById('idade').value,
+                sexo: document.getElementById('sexo').value,
+                genero: document.getElementById('genero').value,
+                estado_civil: document.getElementById('estado_civil').value,
+                profissao: document.getElementById('profissao').value,
+                escolaridade: document.getElementById('escolaridade').value,
+                endereco: document.getElementById('endereco').value,
+                telefone: document.getElementById('telefone').value,
+                email_paciente: document.getElementById('email_paciente').value,
+                encaminhado_por: document.getElementById('encaminhado_por').value,
+                motivo_atendimento: document.getElementById('motivo_atendimento').value,
+                tempo_necessidade: document.getElementById('tempo_necessidade').value,
+                acompanhamento_anterior: getRadioValue('acompanhamento_anterior'),
+                detalhes_acompanhamento: document.getElementById('detalhes_acompanhamento').value,
+                expectativas: document.getElementById('expectativas').value,
+                inicio_problema: document.getElementById('inicio_problema').value,
+                evolucao: document.getElementById('evolucao').value,
+                impacto_vida: document.getElementById('impacto_vida').value,
+                sintomas_associados: document.getElementById('sintomas_associados').value,
+                ideias_morte: getRadioValue('ideias_morte'),
+                detalhes_risco: document.getElementById('detalhes_risco').value,
+                desenvolvimento: document.getElementById('desenvolvimento').value,
+                relacao_pais: document.getElementById('relacao_pais').value,
+                eventos_infancia: document.getElementById('eventos_infancia').value,
+                vida_escolar: document.getElementById('vida_escolar').value,
+                relacionamentos: document.getElementById('relacionamentos').value,
+                conjugalidade: document.getElementById('conjugalidade').value,
+                vida_profissional: document.getElementById('vida_profissional').value,
+                habitos: document.getElementById('habitos').value,
+                substancias: document.getElementById('substancias').value,
+                religiao: document.getElementById('religiao').value
+            };
+
+            // Criar mensagem formatada
+            const mensagem = formatarMensagem(dados);
+
+            // Criar link do WhatsApp
+            const mensagemEncoded = encodeURIComponent(mensagem);
+            const whatsappLink = 'https://wa.me/' + WHATSAPP_NUMERO + '?text=' + mensagemEncoded;
+
+            // Mostrar modal
+            document.getElementById('successModal').style.display = 'flex';
+
+            // Redirecionar após 2 segundos
+            setTimeout(function() {
+                window.location.href = whatsappLink;
+            }, 2000);
+
+            return false;
+        }
+
+        function getRadioValue(name) {
+            const radios = document.getElementsByName(name);
+            for (let radio of radios) {
+                if (radio.checked) return radio.value;
+            }
+            return '';
+        }
+
+        function formatarMensagem(dados) {
+            return `*FICHA DE ANAMNESE*
+═══════════════════════════════════════
+*Profissional:* Anderson S. Bruno - Psicanalista
+═══════════════════════════════════════
+
+*1. IDENTIFICAÇÃO*
+───────────────────────────────────────
+Nome: ${dados.nome_completo || 'N/I'}
+Nascimento: ${dados.data_nascimento || 'N/I'}
+Idade: ${dados.idade || 'N/I'}
+Sexo: ${dados.sexo || 'N/I'}
+Gênero: ${dados.genero || 'N/I'}
+Estado Civil: ${dados.estado_civil || 'N/I'}
+Profissão: ${dados.profissao || 'N/I'}
+Escolaridade: ${dados.escolaridade || 'N/I'}
+Endereço: ${dados.endereco || 'N/I'}
+Telefone: ${dados.telefone || 'N/I'}
+Email: ${dados.email_paciente || 'N/I'}
+Encaminhado por: ${dados.encaminhado_por || 'N/I'}
+
+*2. DEMANDA E QUEIXA*
+───────────────────────────────────────
+Motivo: ${dados.motivo_atendimento || 'N/I'}
+Tempo: ${dados.tempo_necessidade || 'N/I'}
+Acompanhamento anterior: ${dados.acompanhamento_anterior || 'N/I'}
+Detalhes: ${dados.detalhes_acompanhamento || 'N/I'}
+Expectativas: ${dados.expectativas || 'N/I'}
+
+*3. HISTÓRICO DA QUEIXA*
+───────────────────────────────────────
+Início: ${dados.inicio_problema || 'N/I'}
+Evolução: ${dados.evolucao || 'N/I'}
+Impacto: ${dados.impacto_vida || 'N/I'}
+Sintomas: ${dados.sintomas_associados || 'N/I'}
+Ideias de morte: ${dados.ideias_morte || 'N/I'}
+Detalhes risco: ${dados.detalhes_risco || 'N/I'}
+
+*4. HISTÓRICO PESSOAL*
+───────────────────────────────────────
+*Infância:*
+• Desenvolvimento: ${dados.desenvolvimento || 'N/I'}
+• Relação com pais: ${dados.relacao_pais || 'N/I'}
+• Eventos: ${dados.eventos_infancia || 'N/I'}
+• Vida escolar: ${dados.vida_escolar || 'N/I'}
+
+*Vida Adulta:*
+• Relacionamentos: ${dados.relacionamentos || 'N/I'}
+• Conjugalidade: ${dados.conjugalidade || 'N/I'}
+• Profissão: ${dados.vida_profissional || 'N/I'}
+• Hábitos: ${dados.habitos || 'N/I'}
+• Substâncias: ${dados.substancias || 'N/I'}
+• Religião: ${dados.religiao || 'N/I'}
+
+═══════════════════════════════════════
+Enviado em: ${new Date().toLocaleString('pt-BR')}`;
+        }
+
+        function fecharModal() {
+            document.getElementById('successModal').style.display = 'none';
+        }
+
+        function limparFormulario() {
+            if (confirm('Tem certeza que deseja limpar todos os dados?')) {
+                document.getElementById('anamneseForm').reset();
+            }
+        }
+    </script>
+</body>
+</html>
